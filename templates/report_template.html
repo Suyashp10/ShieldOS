@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ title }}</title>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --text: #212529;
+      --section-border: #007bff;
+      --card-bg: #fff;
+      --pass-bg: #d4edda;
+      --fail-bg: #f8d7da;
+      --warn-bg: #fff3cd;
+      --info-bg: #d1ecf1;
+      --pass-color: #155724;
+      --fail-color: #721c24;
+      --warn-color: #856404;
+      --info-color: #0c5460;
+    }
+
+    [data-theme="dark"] {
+      --bg: #1e1e1e;
+      --text: #e1e1e1;
+      --section-border: #66aaff;
+      --card-bg: #2a2a2a;
+      --pass-bg: #244d30;
+      --fail-bg: #5b1f24;
+      --warn-bg: #5a4813;
+      --info-bg: #123c44;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 20px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    h1 {
+      color: var(--section-border);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .timestamp {
+      text-align: center;
+      font-size: 0.9em;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .controls button {
+      margin: 0 5px;
+      padding: 8px 14px;
+      background: var(--card-bg);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .summary {
+      background-color: var(--card-bg);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      border-left: 5px solid var(--section-border);
+    }
+
+    .section {
+      margin-top: 30px;
+      border-left: 4px solid var(--section-border);
+      padding-left: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      background: var(--card-bg);
+      margin-bottom: 8px;
+      padding: 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .pass { background-color: var(--pass-bg); color: var(--pass-color); }
+    .fail { background-color: var(--fail-bg); color: var(--fail-color); }
+    .warn { background-color: var(--warn-bg); color: var(--warn-color); }
+    .info { background-color: var(--info-bg); color: var(--info-color); }
+
+    @media print {
+      .controls { display: none; }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <h1>{{ title }}</h1>
+  <div class="timestamp">{{ timestamp }}</div>
+
+  <div class="controls">
+    <button onclick="toggleTheme()">🌓 Toggle Theme</button>
+    <button onclick="window.print()">🖨️ Print to PDF</button>
+  </div>
+
+  <div class="summary">
+    <h2>Scorecard Summary</h2>
+    <p><strong>Total Checks:</strong> {{ total_items }}</p>
+    <p><strong>Passed:</strong> {{ passed }}</p>
+    <p><strong>Failed:</strong> {{ failed }}</p>
+    <p><strong>Warnings:</strong> {{ warnings }}</p>
+    <p><strong>Info:</strong> {{ info }}</p>
+  </div>
+
+  {% for section in sections %}
+  <div class="section">
+    <h2>{{ section.heading }}</h2>
+    <ul>
+      {% for item in section.items %}
+      <li class="{{ item.status }}">
+        <strong>{{ item.name }}</strong><br />
+        {{ item.description }}
+        {% if item.recommendation %}
+        <br /><em><strong>Recommendation:</strong> {{ item.recommendation }}</em>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+
+  <script>
+    function toggleTheme() {
+      const current = document.body.getAttribute('data-theme');
+      document.body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    }
+  </script>
+
+</body>
+</html>

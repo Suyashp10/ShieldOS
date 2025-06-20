@@ -1,0 +1,21 @@
+# Bytecode and Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+venv/
+
+# Output reports (stored separately)
+reports/*
+!/reports/.gitkeep
+
+# OS/system files
+.DS_Store
+Thumbs.db
+
+# IDE/editor configs
+.vscode/
+.idea/
