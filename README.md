@@ -1,5 +1,10 @@
 # 🛡️ ShieldOS – Linux Hardening Audit Tool
 
+![License](https://img.shields.io/github/license/Suyashp10/ShieldOS?color=brightgreen)
+![Last Commit](https://img.shields.io/github/last-commit/Suyashp10/ShieldOS)
+![Issues](https://img.shields.io/github/issues/Suyashp10/ShieldOS)
+![Stars](https://img.shields.io/github/stars/Suyashp10/ShieldOS?style=social)
+
 > **Secure your Linux systems like a pro — audit, analyze, and armor-up.**
 
 ShieldOS is an advanced yet user-friendly Linux hardening audit tool. Built with extensibility and automation in mind, it empowers system administrators and cybersecurity professionals to identify vulnerabilities, misconfigurations, and security weaknesses in their infrastructure.
