@@ -11,28 +11,28 @@ def format_check_result(name, description, status, recommendations=None) -> dict
         "recommendations": recommendations if recommendations else ""
     }
 
-def summarize_results(sections: list) -> dict:
-    """
-         Count result statuses across all sections for summary display.
-    """
-    passed = failed = warnings = info = 0
+def summarize_results(sections):
+    passed = failed = warning = info = 0
 
     for section in sections:
         for item in section['items']:
+            if not isinstance(item, dict):
+                continue  
             if item['status'] == 'pass':
                 passed += 1
             elif item['status'] == 'fail':
                 failed += 1
             elif item['status'] == 'warn':
-                warnings += 1
+                warning += 1
             elif item['status'] == 'info':
                 info += 1
-    
-    total = passed + failed + warnings + info
+
+    total = passed + failed + warning + info
     return {
-        "total": total,
+        "total_items": total,
         "passed": passed,
         "failed": failed,
-        "warnings": warnings,
+        "warnings": warning,
         "info": info
     }
+
