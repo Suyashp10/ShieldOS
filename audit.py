@@ -814,7 +814,7 @@ def run_advanced_hardening_checks(scan_paths, exclude_paths, fast=False):
 def export_to_html(sections, filename="audit_report.html"):
     try:
         os.makedirs("reports", exist_ok=True)
-        template_dir = os.path.dirname(os.path.abspath(__file__))
+        template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates")
         env = Environment(loader=FileSystemLoader(template_dir))
         template = env.get_template("report_template.html")
         summary = summarize_results(sections)
